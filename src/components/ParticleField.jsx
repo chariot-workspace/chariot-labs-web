@@ -20,7 +20,7 @@ function generateNodes(count) {
       z: r * Math.cos(phi),
       speed: Math.random() * 0.2 + 0.05,
       offset: Math.random() * Math.PI * 2,
-      size: Math.random() * 0.012 + 0.004,
+      size: Math.random() * 0.012 + 0.005,
     })
   }
   return nodes
@@ -84,7 +84,6 @@ function NetworkLines({ nodes, connections, colorRef }) {
             [nodes[j].x, nodes[j].y, nodes[j].z],
           ]}
           color="#00f0ff"
-          lineWidth={0.3}
           transparent
           opacity={strength * 0.12}
           toneMapped={false}
@@ -94,10 +93,6 @@ function NetworkLines({ nodes, connections, colorRef }) {
   )
 }
 
-/**
- * ParticleField — Neural data network surrounding the core.
- * Nodes drift in 3D space with dynamic connection lines.
- */
 export default function ParticleField({ count = NODE_COUNT }) {
   const meshRef = useRef()
   const scroll = useScroll()

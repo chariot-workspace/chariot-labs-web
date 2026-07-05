@@ -8,9 +8,6 @@ import ParticleField from './ParticleField'
 import HoloGrid from './HoloGrid'
 import { getScrollColor } from '../utils/colors'
 
-/**
- * Scene3D — Master 3D scene with scroll-driven camera and post-processing.
- */
 export default function Scene3D() {
   const scroll = useScroll()
   const { camera } = useThree()
@@ -55,7 +52,6 @@ export default function Scene3D() {
       .clone()
       .lerp(cameraTargets[toIdx], t)
 
-    // Subtle mouse parallax
     const mouseX = state.pointer.x * 0.3
     const mouseY = state.pointer.y * 0.2
     targetPos.x += mouseX
@@ -71,9 +67,7 @@ export default function Scene3D() {
     camera.quaternion.slerp(targetQuat, 0.06)
 
     const lightColor = getScrollColor(so)
-    if (lightRef.current) {
-      lightRef.current.color.lerp(lightColor, 0.03)
-    }
+    if (lightRef.current) lightRef.current.color.lerp(lightColor, 0.03)
     if (rimLightRef.current) {
       rimLightRef.current.color.lerp(
         lightColor.clone().multiplyScalar(0.7),

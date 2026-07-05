@@ -95,7 +95,7 @@ export default function ContactFooter() {
             }}
           >
             <a
-              href="mailto:hello@chariotlabs.in"
+              href="mailto:admin@chariotlabs.in"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -109,7 +109,7 @@ export default function ContactFooter() {
               }}
             >
               <Mail size={16} color="#f59e0b" />
-              hello@chariotlabs.in
+              admin@chariotlabs.in
             </a>
             <div
               style={{

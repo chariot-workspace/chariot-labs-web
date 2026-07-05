@@ -93,9 +93,11 @@ function SatelliteNode({ index, scrollRef, colorRef }) {
     <group>
       <Line
         ref={lineRef}
-        points={[[0, 0, 0], [orbitRadius * Math.cos(angle), yOffset, orbitRadius * Math.sin(angle)]]}
+        points={[
+          [0, 0, 0],
+          [orbitRadius * Math.cos(angle), yOffset, orbitRadius * Math.sin(angle)],
+        ]}
         color="#00f0ff"
-        lineWidth={0.5}
         transparent
         opacity={0.15}
         toneMapped={false}
@@ -117,14 +119,12 @@ function SatelliteNode({ index, scrollRef, colorRef }) {
 }
 
 /**
- * CoreEngine — AI neural core visualization.
- * Torus knot with holographic shader, orbiting data nodes,
- * and pulse rings that respond to scroll.
+ * CoreEngine — Holographic torus knot with orbiting nodes and pulse rings.
  */
 export default function CoreEngine() {
   const knotRef = useRef()
   const wireRef = useRef()
-  const innerCoreRef = useRef()
+  const innerRef = useRef()
   const ringRefs = [useRef(), useRef(), useRef()]
   const shaderRef = useRef()
   const scroll = useScroll()
@@ -169,13 +169,13 @@ export default function CoreEngine() {
       wireRef.current.material.opacity = 0.08 + scrollOffset * 0.06
     }
 
-    if (innerCoreRef.current) {
-      innerCoreRef.current.rotation.x = time * 0.3
-      innerCoreRef.current.rotation.z = time * 0.25
+    if (innerRef.current) {
+      innerRef.current.rotation.x = time * 0.3
+      innerRef.current.rotation.z = time * 0.25
       const corePulse = 0.35 + Math.sin(time * 2.5) * 0.08
-      innerCoreRef.current.scale.setScalar(corePulse)
-      innerCoreRef.current.material.color.lerp(currentColor, 0.04)
-      innerCoreRef.current.material.opacity = 0.5 + Math.sin(time * 2) * 0.15
+      innerRef.current.scale.setScalar(corePulse)
+      innerRef.current.material.color.lerp(currentColor, 0.04)
+      innerRef.current.material.opacity = 0.5 + Math.sin(time * 2) * 0.15
     }
 
     ringRefs.forEach((ref, i) => {
@@ -190,7 +190,6 @@ export default function CoreEngine() {
 
   return (
     <group>
-      {/* Holographic torus knot — central AI core */}
       <mesh ref={knotRef}>
         <torusKnotGeometry args={[1.1, 0.32, 256, 32, 2, 3]} />
         <shaderMaterial
@@ -205,7 +204,6 @@ export default function CoreEngine() {
         />
       </mesh>
 
-      {/* Wireframe shell */}
       <mesh ref={wireRef}>
         <icosahedronGeometry args={[1.85, 2]} />
         <meshBasicMaterial
@@ -217,8 +215,7 @@ export default function CoreEngine() {
         />
       </mesh>
 
-      {/* Inner energy core */}
-      <mesh ref={innerCoreRef}>
+      <mesh ref={innerRef}>
         <dodecahedronGeometry args={[0.4, 0]} />
         <meshBasicMaterial
           color="#00f0ff"
@@ -229,7 +226,6 @@ export default function CoreEngine() {
         />
       </mesh>
 
-      {/* Pulse rings */}
       {[2.0, 2.5, 3.1].map((radius, i) => (
         <mesh key={radius} ref={ringRefs[i]}>
           <torusGeometry args={[radius, 0.006, 8, 128]} />
@@ -242,7 +238,6 @@ export default function CoreEngine() {
         </mesh>
       ))}
 
-      {/* Orbiting neural nodes */}
       {Array.from({ length: SATELLITE_COUNT }).map((_, i) => (
         <SatelliteNode
           key={i}
