@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { Mail, Send, MapPin, ArrowUpRight } from 'lucide-react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { getSectionStyle } from '../utils/sectionLayout'
 
 export default function ContactFooter() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const layout = getSectionStyle('contact', isMobile)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,30 +23,21 @@ export default function ContactFooter() {
   return (
     <section
       id="contact"
+      className="section-padding contact-section"
       style={{
         position: 'absolute',
-        top: '500vh',
         left: 0,
         width: '100%',
-        minHeight: '100vh',
+        top: layout.top,
+        minHeight: layout.minHeight,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: isMobile ? 'flex-start' : 'center',
         padding: '80px 1.5rem',
         pointerEvents: 'none',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '60px',
-          alignItems: 'start',
-        }}
-      >
+      <div className="contact-grid">
         {/* Left - Info */}
         <div>
           <div
@@ -128,14 +123,7 @@ export default function ContactFooter() {
         </div>
 
         {/* Right - Form */}
-        <div
-          className="glass-strong"
-          style={{
-            borderRadius: '24px',
-            padding: '36px',
-            pointerEvents: 'auto',
-          }}
-        >
+        <div className="glass-strong contact-form">
           {submitted ? (
             <div
               style={{
@@ -276,20 +264,7 @@ export default function ContactFooter() {
       </div>
 
       {/* Footer */}
-      <footer
-        style={{
-          maxWidth: '1100px',
-          margin: '80px auto 0',
-          width: '100%',
-          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-          paddingTop: '32px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '16px',
-        }}
-      >
+      <footer className="footer-inner">
         <div
           style={{
             display: 'flex',

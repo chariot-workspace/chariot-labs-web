@@ -1,21 +1,20 @@
-/** Virtual scroll offsets for ScrollControls (pages=6 → 5 intervals). */
-export const SECTION_OFFSETS = {
-  hero: 0,
-  about: 1 / 5,
-  ecosystem: 2 / 5,
-  contact: 1,
-}
+import { getSectionOffsets } from './sectionLayout'
 
 let scrollState = null
+let sectionOffsets = getSectionOffsets(false)
 
 export function registerScrollState(state) {
   scrollState = state
 }
 
+export function setSectionOffsets(isMobile) {
+  sectionOffsets = getSectionOffsets(isMobile)
+}
+
 export function scrollToSection(sectionId) {
   if (!scrollState?.el) return
 
-  const offset = SECTION_OFFSETS[sectionId]
+  const offset = sectionOffsets[sectionId]
   if (offset === undefined) return
 
   const el = scrollState.el

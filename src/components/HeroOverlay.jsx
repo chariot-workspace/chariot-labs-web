@@ -5,6 +5,7 @@ export default function HeroOverlay() {
   return (
     <section
       id="hero"
+      className="hero-section"
       style={{
         position: 'absolute',
         top: 0,
@@ -90,7 +91,7 @@ export default function HeroOverlay() {
 
         {/* CTA Button */}
         <button
-          className="btn-primary animate-fade-up"
+          className="btn-primary animate-fade-up hero-cta"
           style={{
             animationDelay: '0.45s',
             animationFillMode: 'both',
@@ -108,14 +109,8 @@ export default function HeroOverlay() {
 
       {/* Scroll indicator */}
       <div
-        className="animate-fade-up"
+        className="hero-scroll-indicator animate-fade-up"
         style={{
-          position: 'absolute',
-          bottom: '40px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '8px',
           animationDelay: '0.8s',
           animationFillMode: 'both',
         }}

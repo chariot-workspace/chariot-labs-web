@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
 import { useScroll } from '@react-three/drei'
-import { registerScrollState } from '../utils/scrollTo'
+import { registerScrollState, setSectionOffsets } from '../utils/scrollTo'
 
-/** Registers drei scroll state so HTML overlays & nav can scroll programmatically. */
-export default function ScrollBridge() {
+export default function ScrollBridge({ isMobile }) {
   const scroll = useScroll()
+
+  useEffect(() => {
+    setSectionOffsets(isMobile)
+  }, [isMobile])
 
   useEffect(() => {
     registerScrollState(scroll)

@@ -1,4 +1,6 @@
 import { Users, MapPin, Cpu, Zap } from 'lucide-react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { getSectionStyle } from '../utils/sectionLayout'
 
 const stats = [
   { icon: Cpu, label: 'Products Shipped', value: '3+' },
@@ -8,17 +10,21 @@ const stats = [
 ]
 
 export default function AboutSection() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const layout = getSectionStyle('about', isMobile)
+
   return (
     <section
       id="about"
+      className="section-padding about-section"
       style={{
         position: 'absolute',
-        top: '100vh',
         left: 0,
         width: '100%',
-        minHeight: '100vh',
+        top: layout.top,
+        minHeight: layout.minHeight,
         display: 'flex',
-        alignItems: 'center',
+        alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'center',
         padding: '80px 1.5rem',
         pointerEvents: 'none',
@@ -53,8 +59,8 @@ export default function AboutSection() {
           }}
         >
           Founded in{' '}
-          <span className="gradient-text-violet">Noida</span> by engineers
-          <br />
+          <span className="gradient-text-violet">Noida</span> by engineers{' '}
+          <span className="about-break" />
           who believe in{' '}
           <span className="gradient-text-cyan">building what matters</span>.
         </h2>
@@ -78,14 +84,7 @@ export default function AboutSection() {
         </p>
 
         {/* Stats Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '16px',
-            pointerEvents: 'auto',
-          }}
-        >
+        <div className="stats-grid">
           {stats.map((stat, i) => (
             <div
               key={i}

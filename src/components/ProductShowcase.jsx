@@ -1,4 +1,6 @@
 import { Shield, GraduationCap, Sun, ArrowUpRight } from 'lucide-react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { getSectionStyle } from '../utils/sectionLayout'
 
 const products = [
   {
@@ -212,15 +214,19 @@ function ProductVisual({ type, color }) {
 }
 
 export default function ProductShowcase() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const layout = getSectionStyle('ecosystem', isMobile)
+
   return (
     <section
       id="ecosystem"
+      className="section-padding ecosystem-section"
       style={{
         position: 'absolute',
-        top: '200vh',
         left: 0,
         width: '100%',
-        minHeight: '260vh',
+        top: layout.top,
+        minHeight: layout.minHeight,
         padding: '80px 1.5rem',
         pointerEvents: 'none',
       }}
@@ -252,20 +258,14 @@ export default function ProductShowcase() {
             }}
           >
             Three platforms.{' '}
-            <span className="gradient-text">Three industries.</span>
-            <br />
+            <span className="gradient-text">Three industries.</span>{' '}
+            <span className="ecosystem-break" />
             One engineering philosophy.
           </h2>
         </div>
 
         {/* Product Cards */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '48px',
-          }}
-        >
+        <div className="product-cards-stack" style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
           {products.map((product, index) => (
             <div
               key={product.id}
@@ -278,18 +278,15 @@ export default function ProductShowcase() {
               }}
             >
               {/* Visual header */}
-              <div
-                style={{
-                  padding: '0 32px',
-                  paddingTop: '24px',
-                  overflow: 'hidden',
-                }}
-              >
+              <div className="product-card-visual" style={{
+                paddingTop: '24px',
+                overflow: 'hidden',
+              }}>
                 <ProductVisual type={product.visual} color={product.accentColor} />
               </div>
 
               {/* Content */}
-              <div style={{ padding: '32px' }}>
+              <div className="product-card-content">
                 <div
                   style={{
                     display: 'flex',
