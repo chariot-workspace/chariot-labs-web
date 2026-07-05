@@ -1,0 +1,392 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/outfit/700.css";
+@import "@fontsource/outfit/800.css";
+
+/* ── Design Tokens ── */
+@theme {
+  --color-bg: #020617;
+  --color-bg-alt: #0a0f1e;
+  --color-surface: rgba(15, 23, 42, 0.6);
+  --color-surface-hover: rgba(30, 41, 59, 0.7);
+  --color-accent: #00f0ff;
+  --color-accent-2: #8b5cf6;
+  --color-accent-3: #f59e0b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(0, 240, 255, 0.2);
+
+  --font-heading: "Outfit", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ── Base Resets ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+  color: #fff;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* ── Glassmorphism Utility ── */
+.glass {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Glow Effects ── */
+.glow-cyan {
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.12), 0 0 60px rgba(0, 240, 255, 0.06);
+}
+
+.glow-violet {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.12), 0 0 60px rgba(139, 92, 246, 0.06);
+}
+
+.glow-amber {
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.12), 0 0 60px rgba(245, 158, 11, 0.06);
+}
+
+.text-glow {
+  text-shadow: 0 0 40px rgba(0, 240, 255, 0.3), 0 0 80px rgba(0, 240, 255, 0.1);
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ── Gradient Text Utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #00f0ff 0%, #8b5cf6 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #00f0ff, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-violet {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-amber {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section Visibility Triggers ── */
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ── Product Card Hover ── */
+.product-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+/* ── Form Inputs ── */
+.input-field {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  width: 100%;
+}
+
+.input-field:focus {
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.08);
+}
+
+.input-field::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+/* ── Button ── */
+.btn-primary {
+  background: linear-gradient(135deg, #00f0ff, #8b5cf6);
+  color: #030712;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 14px 36px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(139, 92, 246, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ── Loading Screen ── */
+.loader-container {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  gap: 24px;
+}
+
+.loader-bar-track {
+  width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff, #8b5cf6);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ── Ambient Background Orbs ── */
+.ambient-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient-orbs::before,
+.ambient-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: orb-drift 20s ease-in-out infinite;
+}
+
+.ambient-orbs::before {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15), transparent 70%);
+  top: -10%;
+  left: -5%;
+}
+
+.ambient-orbs::after {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+  bottom: -15%;
+  right: -5%;
+  animation-delay: -10s;
+  animation-direction: reverse;
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+/* ── Hero Enhancements ── */
+.hero-title {
+  text-shadow: 0 0 80px rgba(0, 240, 255, 0.08);
+}
+
+.shimmer-text {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.badge-glow {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.08), inset 0 0 20px rgba(0, 240, 255, 0.03);
+}
+
+.nav-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ── Card border shimmer ── */
+.product-card {
+  position: relative;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 240, 255, 0.2),
+    transparent 40%,
+    transparent 60%,
+    rgba(139, 92, 246, 0.15)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
