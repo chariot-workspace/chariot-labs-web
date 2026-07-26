@@ -124,6 +124,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -131,8 +132,13 @@ body {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in-left {
@@ -140,6 +146,7 @@ body {
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -147,18 +154,37 @@ body {
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes count-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
 }
 
 /* ── Scroll Reveal ── */
@@ -166,7 +192,7 @@ body {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -174,10 +200,21 @@ body {
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
 
 /* ── Top Bar ── */
 .top-bar {
@@ -494,19 +531,132 @@ body {
   overflow: hidden;
 }
 
-.hero-section::before {
-  content: '';
+/* ── Craziest Interactive AI Background (Hero Only) ── */
+.hero-crazy-bg {
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 3px,
-    rgba(255, 255, 255, 0.02) 3px,
-    rgba(255, 255, 255, 0.02) 4px
-  );
+  overflow: hidden;
+  pointer-events: auto;
+  z-index: 0;
+}
+
+.hero-plasma-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: plasma-drift 18s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .hero-plasma-orb {
+  opacity: 0.4;
+  filter: blur(80px);
+}
+
+.hero-plasma-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.45) 0%, rgba(0, 101, 255, 0.2) 50%, transparent 80%);
+  top: -20%;
+  left: 15%;
+  animation-duration: 16s;
+}
+
+.hero-plasma-2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 80%);
+  bottom: -15%;
+  right: 10%;
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.hero-plasma-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, rgba(0, 101, 255, 0.1) 50%, transparent 80%);
+  top: 25%;
+  left: -10%;
+  animation-duration: 20s;
+  animation-delay: -10s;
+}
+
+@keyframes plasma-drift {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(50px, -40px) scale(1.2) rotate(60deg); }
+  66% { transform: translate(-40px, 30px) scale(0.85) rotate(120deg); }
+  100% { transform: translate(30px, -20px) scale(1.1) rotate(180deg); }
+}
+
+.hero-cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 90%);
+}
+
+.hero-constellation-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Holographic AI Core Rings */
+.hero-ai-ring {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 240, 255, 0.25);
   pointer-events: none;
   z-index: 0;
+}
+
+.hero-ai-ring-1 {
+  width: 550px;
+  height: 550px;
+  border-color: rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 40px rgba(0, 101, 255, 0.15), inset 0 0 40px rgba(0, 101, 255, 0.1);
+  animation: ring-rotate 30s linear infinite;
+}
+
+.hero-ai-ring-2 {
+  width: 750px;
+  height: 750px;
+  border-color: rgba(139, 92, 246, 0.18);
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.1);
+  animation: ring-rotate 45s linear infinite reverse;
+}
+
+@keyframes ring-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Glowing Boundary Line */
+.hero-horizon-glow {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  box-shadow: 0 0 20px var(--color-accent);
 }
 
 .hero-content {
@@ -1476,6 +1626,7 @@ body {
 
 /* ── Touch devices ── */
 @media (hover: none) and (pointer: coarse) {
+
   .nav-link,
   .nav-mobile-link,
   .btn-primary {
