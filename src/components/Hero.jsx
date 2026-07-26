@@ -1,9 +1,11 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
+import HeroBackground from './HeroBackground'
 import { scrollToSection } from '../utils/scrollTo'
 
 export default function Hero() {
   return (
     <section id="hero" className="hero-section">
+      <HeroBackground />
       <div className="hero-content">
         <div className="hero-badge">
           <Sparkles size={14} className="text-accent" />
