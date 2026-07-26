@@ -1,127 +1,76 @@
-import { Users, MapPin, Cpu, Zap } from 'lucide-react'
-import { useMediaQuery } from '../hooks/useMediaQuery'
-import { getSectionStyle } from '../utils/sectionLayout'
+import { MapPin, Bot, Database, Eye, CheckCircle2 } from 'lucide-react'
 
-const stats = [
-  { icon: Cpu, label: 'Products Shipped', value: '3+' },
-  { icon: Users, label: 'Industries Served', value: '3' },
-  { icon: Zap, label: 'Uptime SLA', value: '99.9%' },
-  { icon: MapPin, label: 'Based In', value: 'Noida' },
+const focusAreas = [
+  {
+    icon: Bot,
+    title: 'Agentic Workflows',
+    detail: 'Autonomous AI agents that execute complex, multi-step business actions across APIs.',
+  },
+  {
+    icon: Database,
+    title: 'Enterprise Knowledge',
+    detail: 'Private RAG architectures enabling accurate conversational search over proprietary data.',
+  },
+  {
+    icon: Eye,
+    title: 'Vision & Perception',
+    detail: 'Edge and cloud computer vision models for automated inspection, safety, and tracking.',
+  },
+]
+
+const principles = [
+  'We build custom AI capabilities tailored specifically to your data schema and workflows — zero generic wrappers.',
+  'Your data remains 100% private. We implement zero-data-retention pipelines and on-premise model deployments.',
+  'Full production engineering: latency optimization, fallback handling, hallucination guardrails, and telemetry monitoring.',
 ]
 
 export default function AboutSection() {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const layout = getSectionStyle('about', isMobile)
-
   return (
-    <section
-      id="about"
-      className="section-padding about-section"
-      style={{
-        position: 'absolute',
-        left: 0,
-        width: '100%',
-        top: layout.top,
-        minHeight: layout.minHeight,
-        display: 'flex',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        justifyContent: 'center',
-        padding: '80px 1.5rem',
-        pointerEvents: 'none',
-      }}
-    >
-      <div style={{ maxWidth: '1100px', width: '100%' }}>
-        {/* Section Tag */}
-        <div
-          style={{
-            fontFamily: '"Inter", system-ui',
-            fontSize: '0.75rem',
-            color: '#8b5cf6',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            marginBottom: '20px',
-            fontWeight: 600,
-          }}
-        >
-          About Us
+    <section id="about" className="section">
+      <div className="about-grid">
+        <div>
+          <div className="section-label">About Chariot Labs</div>
+          <h2 className="section-title">
+            Your dedicated engineering partner for enterprise AI solutions.
+          </h2>
+          <p className="section-description" style={{ marginBottom: '24px' }}>
+            Based in Noida, Chariot Labs specializes in turning cutting-edge AI research into robust, production-ready software.
+          </p>
+          <p className="section-description" style={{ marginBottom: '32px' }}>
+            Whether you need custom autonomous AI agents, enterprise-grade RAG systems over internal data, or real-time computer vision pipelines — we architect solutions designed specifically for your operational requirements.
+          </p>
+
+          <ul className="about-principles">
+            {principles.map((item, i) => (
+              <li key={i} className="about-principle">
+                <CheckCircle2 size={18} className="text-accent" style={{ flexShrink: 0, marginTop: 3 }} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '32px', color: 'var(--color-text-muted)', fontSize: '0.85rem' }}>
+            <MapPin size={16} className="text-accent" />
+            <span>Noida, Uttar Pradesh, India — Engineering AI for global enterprises</span>
+          </div>
         </div>
 
-        {/* Main statement */}
-        <h2
-          style={{
-            fontFamily: '"Outfit", system-ui',
-            fontWeight: 700,
-            fontSize: 'clamp(1.8rem, 4vw, 3.2rem)',
-            lineHeight: 1.2,
-            color: '#f1f5f9',
-            marginBottom: '24px',
-            letterSpacing: '-0.02em',
-          }}
-        >
-          Founded in{' '}
-          <span className="gradient-text-violet">Noida</span> by engineers{' '}
-          <span className="about-break" />
-          who believe in{' '}
-          <span className="gradient-text-cyan">building what matters</span>.
-        </h2>
-
-        {/* Description */}
-        <p
-          style={{
-            fontFamily: '"Inter", system-ui',
-            fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
-            lineHeight: 1.8,
-            color: '#94a3b8',
-            maxWidth: '700px',
-            marginBottom: '48px',
-          }}
-        >
-          Chariot Labs was started with a singular focus: engineer solutions that
-          eliminate operational friction. We don't build for demos — we build for
-          production at scale. Every line of code is designed to solve real problems
-          for real organizations, from enterprise security to education to renewable
-          energy forecasting.
-        </p>
-
-        {/* Stats Grid */}
-        <div className="stats-grid">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="glass product-card"
-              style={{
-                padding: '28px 24px',
-                borderRadius: '16px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '14px',
-              }}
-            >
-              <stat.icon size={22} color="#8b5cf6" strokeWidth={1.5} />
-              <div
-                style={{
-                  fontFamily: '"Outfit", system-ui',
-                  fontWeight: 700,
-                  fontSize: '1.8rem',
-                  color: '#f1f5f9',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {stat.value}
+        {/* Right side focus cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {focusAreas.map((area, i) => {
+            const Icon = area.icon
+            return (
+              <div key={i} className="card" style={{ padding: '24px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <div className="card-icon" style={{ marginBottom: 0, width: '40px', height: '40px', flexShrink: 0 }}>
+                  <Icon size={20} />
+                </div>
+                <div>
+                  <h3 className="card-title" style={{ fontSize: '1.05rem', marginBottom: '4px' }}>{area.title}</h3>
+                  <p className="card-text" style={{ fontSize: '0.85rem' }}>{area.detail}</p>
+                </div>
               </div>
-              <div
-                style={{
-                  fontFamily: '"Inter", system-ui',
-                  fontSize: '0.8rem',
-                  color: '#64748b',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
